@@ -9,7 +9,7 @@ tags:
 ## 0. 简介
 使用 Latex 编写的文档在一些情况下需要转化成 *.docx* 格式，现存的 Latex2Word 软件大多需要收取一定费用才能实现转化。
 而 Pandoc 是一款免费开源的文档格式转化工具，支持众多的支持类型之间的转化，再加上其优秀的转化效果，使得其受到广泛的应用。本文将简单介绍使用 Pandoc 将 *.tex* 转化成 *.docx* 文件的流程及注意事项。因为本人只在 Windows 操作系统下进行过测试，
-因此以下教程不一定适用其他操作系统。
+因此以下教程不一定适用其他操作系统。<!-- more -->
 ## 1. Pandoc 安装
 Pandoc 安装比较简单，可以在 [Pandoc 官网](https://pandoc.org/installing.html) 下载和安装最新版本，
 或者在 [Github Releases](https://github.com/jgm/pandoc/releases/) 下载需要的版本。本文中使用 pandoc-2.11.0.4 版本。
