@@ -85,11 +85,19 @@ pandoc input.tex  --filter pandoc-crossref --citeproc --csl springer-basic-note.
 
 ### 6.1. 版本不符合预期
    
-明明安装了最新的 Pandoc 版本如 Pandoc-2.11.0.4, 但发现 Pandoc 版本不正确，例如 Pandoc-1.19.2.1。从而导致使用预期匹配版本的 pandoc-crossref 报错。可以使用 
+明明安装了与 Pandoc 版本匹配的 pandoc-crossref 但使用 pandoc-crossref 时出现版本不一致现象，有如下错误：
+~~~
+WARNING: pandoc-crossref was compiled with pandoc 2.11.0.4 but is being run through 1.19.2.1. This is not supported. Strange things may (and likely will) happen silently.
+pandoc-crossref: Error in $: Incompatible API versions: encoded with [1,17,0,4]
+but attempted to decode with [1,22].
+~~~
+同时使用 
 ~~~
 pandoc -v
 ~~~ 
-查看版本号。
+发现结果与安装版本不符。 
+例如 Pandoc-2.11.0.4, 但发现为 Pandoc-1.19.2.1。
+
 
 解决办法：
   1. Python 包管理器 Anaconda 中提供了 Pandoc 的运行脚本，如果安装了 Anaconda 并设置了环境变量，系统很大可能会调用Anaconda 中的 Pandoc 可执行程序，从而导致运行版本与预期不符。**这时可以暂时把 ~\ProgramData\Anaconda3\Scripts 下的 pandoc.exe 移除**，转化完之后再重新放回。
