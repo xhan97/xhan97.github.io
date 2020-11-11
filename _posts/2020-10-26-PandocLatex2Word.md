@@ -17,7 +17,7 @@ Pandoc 安装比较简单，可以在 [Pandoc 官网](https://pandoc.org/install
 ## 3. 基本使用
 在Windows 下打开 DOS 命令窗口并进入到要转化的 *.tex* 文件的目录。之后使用如下命令：
 
-~~~
+~~~ sh
 pandoc input.tex -o output.docx
 ~~~
 
@@ -31,7 +31,7 @@ Pandoc 不能直接生成表格，公式或者图片在正文的交叉引用编�
 需要在 [GitHub Repo](https://github.com/lierdakil/pandoc-crossref/releases) 发布页面上下载预构建好的 *.exe* 文件。然后将这个可执行文件放在 Pandoc 的安装目录中。**注意： pandoc-crossref 的版本必须与 pandoc 的版本匹配**
 并使用如下命令：
 
-~~~ 
+~~~sh
 --filter pandoc-crossref 
 ~~~
 
@@ -39,7 +39,7 @@ Pandoc 不能直接生成表格，公式或者图片在正文的交叉引用编�
 参考文献是论文必不可少的部分，自动从 *.tex* 生成参考文献可节约大量格式转化的时间。
 可以通过添加如下命令生成参考文献。
 
-~~~
+~~~sh
 --bibliography=reference.bib
 ~~~
 
@@ -48,7 +48,7 @@ Pandoc 不能直接生成表格，公式或者图片在正文的交叉引用编�
 在 Pandoc 中，参考文献的格式可以通过特定的 *.csl* 文件指定，
 在 [Zotero Style Repository](https://www.zotero.org/styles) 下载到所需的 *.csl* 文件，如springer-basic-note.csl，并放置到与 *.tex* 文件同级目录下。使用如下命令指定格式：
 
-~~~
+~~~sh
 --csl springer-basic-note.csl 
 ~~~
 
@@ -56,20 +56,20 @@ Pandoc 不能直接生成表格，公式或者图片在正文的交叉引用编�
 ``--filter pandoc-citeproc``
 这个命令。**但新版本的 Pandoc 已经弃用了这个命令**，而改为直接使用：
 
-~~~ 
+~~~sh 
 --citeproc
 ~~~ 
 
 由此得到完整的生成指定格式参考文献的命令为：
 
-~~~ 
+~~~sh 
 --citeproc --csl springer-basic-note.csl
 ~~~
 
 ### 5.2. 章节名称
 上面命名只能生成参考文献列表，但不能生成参考文献的章节名。可用如下命令自定义参考文献的章节名：
 
-~~~
+~~~sh
 -M reference-section-title=Reference
 ~~~
 
@@ -77,7 +77,7 @@ Pandoc 不能直接生成表格，公式或者图片在正文的交叉引用编�
 ## 6. 完整命令
 总结上述内容，得到最常用 *.tex* 文件转 *.docx* 命令为:
 
-~~~
+~~~sh
 pandoc input.tex  --filter pandoc-crossref --citeproc --csl springer-basic-note.csl  --bibliography=reference.bib -M reference-section-title=Reference -o output.docx
 ~~~
 
@@ -86,13 +86,13 @@ pandoc input.tex  --filter pandoc-crossref --citeproc --csl springer-basic-note.
 ### 7.1. 版本不符合预期
    
 明明安装了与 Pandoc 版本匹配的 pandoc-crossref 但使用 pandoc-crossref 时出现版本不一致现象，有如下错误：
-~~~
+~~~sh
 WARNING: pandoc-crossref was compiled with pandoc 2.11.0.4 but is being run through 1.19.2.1. This is not supported. Strange things may (and likely will) happen silently.
 pandoc-crossref: Error in $: Incompatible API versions: encoded with [1,17,0,4]
 but attempted to decode with [1,22].
 ~~~
 同时使用 
-~~~
+~~~sh
 pandoc -v
 ~~~ 
 发现结果与安装版本不符。 
