@@ -16,7 +16,7 @@ Pandoc 是一款免费且开源的文档格式转化工具，支持众多文本�
 
 Pandoc 安装比较简单，可以在 [Pandoc 官网](https://pandoc.org/installing.html) 下载和安装最新版本，
 或者在 [Github Releases](https://github.com/jgm/pandoc/releases/) 下载需要的版本。
-本文使用 pandoc-2.11.0.4 版本。
+本文使用 pandoc-2.17.1.1 版本。
 
 ## 3. 基本使用
 
@@ -39,11 +39,37 @@ output 是输出的文件名，注意必须是 *.docx* 后缀。转化的 *.docx
 Pandoc 不能直接生成表格，公式或者图片在正文的交叉引用编号。pandoc-crossref 这个工具可以帮助 Pandoc 达到这个目的。
 对于 Windows 系统，需要从 [GitHub Repo](https://github.com/lierdakil/pandoc-crossref/releases) 下载 *pandoc-crossref-Windows.7z*，解压后将 *pandoc-crossref.exe* 粘贴到 Pandoc 的安装目录中。**注意： pandoc-crossref 的版本必须与 pandoc 的版本匹配**。
 
-使用配置命令启用交叉引用。
+使用以下配置命令启用交叉引用：
 
 ~~~sh
 --filter pandoc-crossref 
 ~~~
+
+#### 4.1.1 公式编号
+
+通过添加以下配置命令自动生成公式的编号并对齐：
+
+~~~sh
+-M autoEqnLabels 
+-M tableEqns
+~~~
+
+#### 4.1.2 标注的编号
+
+Latex 中表格和图片的 `\caption` 的编号通过以下配置命令自动转化：
+
+~~~sh
+-t docx+native_numbering
+~~~
+
+#### 4.1.3 章节编号
+
+通过添加以下配置命令生成各个章节的编号：
+
+~~~sh
+--number-sections
+~~~
+
 
 ### 4.2 参考文献
 
@@ -93,10 +119,12 @@ Pandoc 不能直接生成表格，公式或者图片在正文的交叉引用编�
 学术论文中最常用的 *.tex* 文件转 *.docx* 命令为:
 
 ~~~sh
-pandoc input.tex  --filter pandoc-crossref --citeproc --csl springer-basic-note.csl  --bibliography=reference.bib -M reference-section-title=Reference -o output.docx
+
+pandoc input.tex  --filter pandoc-crossref --citeproc --csl springer-basic-note.csl  --bibliography=reference.bib -M reference-section-title=Reference  -M autoEqnLabels -M tableEqns  -t docx+native_numbering --number-sections -o output.docx
 ~~~
 
 配置的详细解释请在第 4 节查阅。
+使用上述命令转化 `Springer Lecture Notes in Computer Science (LNCS)` 的示例可以在 [Latex2wordExample](https://github.com/xhan97/Latex2WordExample) 中查看。
 
 ## 6. 踩过的坑
 
